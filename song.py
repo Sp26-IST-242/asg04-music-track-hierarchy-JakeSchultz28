@@ -19,3 +19,36 @@ responsibility is to:
             (Kendrick Lamar, Hip-Hop) DAMN. active = True,  debut year: 2017,
             duration: 03:40
 """
+
+from music_track import MusicTrack
+from artist import Artist
+from album import Album
+
+class Song(MusicTrack):
+    
+    # Constructor
+    def __init__(self, artist : Artist,
+                album : Album, duration_seconds : int):
+        super().__init__(artist, album, duration_seconds)
+    
+    # Getters
+    def play_time_formatted(self):
+      # Formats play time
+      time = int(self._duration_seconds)
+      minutes = time // 60
+      seconds = time % 60
+      return f"{minutes:02}:{seconds:02}"
+    
+    @property
+    def duration_seconds(self):
+       # Returns duration in seconds
+       return self._duration_seconds
+    
+    @property
+    def release_year(self):
+       # Returns first album year
+       return self.album.debut_year
+    
+    def __str__(self):
+       # Prints full song details
+       return f"({self._artist}) {self._album}, duration: {self.play_time_formatted()}"
